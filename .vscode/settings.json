@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.tpb": "plsql",
+    "*.tps": "plsql",
+    "*.pkb": "plsql",
+    "*.pks": "plsql",
+    "*.sql": "plsql",
+    "memory.C": "cpp"
+  }
+}

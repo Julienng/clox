@@ -4,7 +4,6 @@
     "*.tps": "plsql",
     "*.pkb": "plsql",
     "*.pks": "plsql",
-    "*.sql": "plsql",
-    "memory.C": "cpp"
+    "*.sql": "plsql"
   }
 }

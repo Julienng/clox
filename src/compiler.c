@@ -5,6 +5,10 @@
 #include "compiler.h"
 #include "scanner.h"
 
+#ifdef DEBUG_PRINT_CODE
+#include "debug.h"
+#endif
+
 typedef struct {
   Token current;
   Token previous;
@@ -58,6 +62,8 @@ static void errorAt(Token* token, const char* message) {
   parser.hadError = true;
 }
 
+static void error(const char* message) { errorAt(&parser.previous, message); }
+
 static void errorAtCurrent(const char* message) {
   errorAt(&parser.current, message);
 }
@@ -106,7 +112,14 @@ static void emitConstant(Value value) {
   emitBytes(OP_CONSTANT, makeConstant(value));
 }
 
-static void endCompiler() { emitReturn(); }
+static void endCompiler() {
+  emitReturn();
+#ifdef DEBUG_PRINT_CODE
+  if (!parser.hadError) {
+    disassembleChunk(currentChunk(), "code");
+  }
+#endif
+}
 
 static void expression();
 static ParseRule* getRule(TokenType type);
